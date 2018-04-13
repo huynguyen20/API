@@ -1,6 +1,6 @@
 'use strict';
 
-const collector = require("../api/controller/collector.js");
+const collector = require("../api/controllers/collector.js");
 const distributor = require("../api/controllers/distribute.js");
 const init = require("../api/controllers/init.js");
 const cert = require("../api/controllers/cert.js");
