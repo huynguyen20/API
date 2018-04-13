@@ -1,16 +1,16 @@
 'use strict';
 
-const server_ip="";
+const config = require('../../config.js');
+
 
 var mongo=require('mongodb');
 var MongoClient = mongo.MongoClient;
-var url = "mongodb://localhost:27017/test";
 var util = require('util');
 var app = require('express');
 
 exports.distributedata = function(req,res){
 	console.log("GET REQ");
-	MongoClient.connect(url, function( err, db){
+	MongoClient.connect(config.mongo_URL, function( err, db){
 		if (err) {
 			console.log(err);
 		} else {

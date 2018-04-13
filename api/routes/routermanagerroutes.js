@@ -3,12 +3,12 @@
 const collector = require("../controllers/collector.js");
 const distributor = require("../controllers/distribute.js");
 const init = require("../controllers/init.js");
-const cert = require("../controllers/cert.js");
+const cert = require("../models/cert.js");
 
 
 module.exports = function(app) {
 	app.route('/collector')
-		.post(collector.collectdatas);
+		.post(collector.authentication);
 
 	app.route('/distributor')
 		.get(distributor.distributedata);

@@ -1,14 +1,9 @@
 'use strict';
 
-const server_ip="";
 
-var config = require('../../config.js');
-var mongo=require('mongodb');
-var MongoClient = mongo.MongoClient;
-var url = "mongodb://localhost:27017/test";
-var apiCollectorUrl = config.ip + "/collector";
-var util = require('util');
-var app = require('express');
+const config = require('../../config.js');
+const auth = require('../models/auth.js');
+const apiCollectorUrl=config.ip+'/collector';
 
 exports.initdevice = function(req,res){
 	console.log("device initialize");
@@ -18,7 +13,7 @@ exports.initdevice = function(req,res){
 	response_object.username='test';
     response_object.password='test';
     //todo:Token creation function
-	response_object.token='75199254-5ab0-4fce-a8fc-e16b1978b103';
+	response_object.token=auth.createToken(req.query.mac);
 	response_object.mac=req.query.mac;
 	response_object.api_url=apiCollectorUrl;
 	response_object.stats_url=apiCollectorUrl;
@@ -31,5 +26,5 @@ exports.initdevice = function(req,res){
 	
 	var response_string=JSON.stringify(response_object);
 	res.json(response_object);		
-	
+    
 }
