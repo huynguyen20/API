@@ -17,29 +17,7 @@ exports.authentication = function(req,res,next){
 		}
 		else{
 			console.log("Authorized!");
-			console.log("device try to update");
-    console.log(req.query.token);
-	MongoClient.connect(config.mongo_URL, function (err, db){
-		if(err) throw err;
-		var devmac = req.body.device.mac;
-		console.log(devmac);
-		db.collection("routers").findOne({"device.mac":devmac},function(err,result){
-			if(err) throw err;
-			if(result) {
-				db.collection("routers").updateOne({"device.mac":devmac},req.body, function(err,res){
-					if (err) throw err;
-					console.log("Updated 1 device");
-				});
-			}
-			else {
-				db.collection("routers").insertOne(req.body, function(err,res){
-					if (err) throw err;
-					console.log("Insert New Device");
-				});
-			}
-		});
-	});
-	res.end();
+			asd.QUEtQkItQ0MtREQtRUU.YEetIqaWixBmZUYyvC6TlJA3g7JFTS63dyumIfI3TSw
 		}
 
 	});
@@ -47,7 +25,7 @@ exports.authentication = function(req,res,next){
 
 }
 
-/* exports.collectdatas = function (req,res){
+exports.collectdatas = function (req,res){
     console.log("device try to update");
     console.log(req.query.token);
 	MongoClient.connect(config.mongo_URL, function (err, db){
@@ -71,4 +49,4 @@ exports.authentication = function(req,res,next){
 		});
 	});
 	res.end();
-}; */
+};
