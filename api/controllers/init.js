@@ -2,9 +2,11 @@
 
 const server_ip="";
 
+var config = require('../../config.js');
 var mongo=require('mongodb');
 var MongoClient = mongo.MongoClient;
 var url = "mongodb://localhost:27017/test";
+var apiCollectorUrl = config.ip + "/collector";
 var util = require('util');
 var app = require('express');
 
@@ -13,14 +15,13 @@ exports.initdevice = function(req,res){
 	console.log(req.query.mac);
 	var response_object={};
 
-	
 	response_object.username='test';
     response_object.password='test';
     //todo:Token creation function
 	response_object.token='75199254-5ab0-4fce-a8fc-e16b1978b103';
 	response_object.mac=req.query.mac;
-	response_object.api_url="http://103.88.123.103:8888/collector";
-	response_object.stats_url="http://103.88.123.103:8888/collector";
+	response_object.api_url=apiCollectorUrl;
+	response_object.stats_url=apiCollectorUrl;
 	response_object.sleep=30;
 	response_object.monitor=15;
 	response_object.scan=1;

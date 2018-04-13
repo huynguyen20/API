@@ -9,7 +9,9 @@ var util = require('util');
 var app = require('express');
 
 exports.collectdatas = function (req,res){
-	console.log("device try to update");
+    console.log("device try to update");
+    console.log(req.query.token);
+    console.log(req.headers['x-access-token']);
 	MongoClient.connect(url, function (err, db){
 		if(err) throw err;
 		var devmac = req.body.device.mac;
