@@ -1,23 +1,26 @@
 'use strict';
 
+const collector = require("../controller/collector.js");
+const distributor = require("../controllers/distribute.js");
+const init = require("../controllers/init.js");
+const cert = require("../controllers/cert.js");
 
 
 module.exports = function(app) {
-	var manager = require("../controllers/routermanagercontroller")
 	app.route('/collector')
-		.post(manager.collectdatas);
+		.post(collector.collectdatas);
 
 	app.route('/distributor')
-		.get(manager.distributedata);
+		.get(distributor.distributedata);
 
 	app.route('/distributor:id')
-		.get(manager.getdeviceinfobyid);
+		.get(distributor.getdeviceinfobyid);
 
 	
 	app.route('/init')
-		.get(manager.initdevice);
+		.get(init.initdevice);
 
 	app.route('/cert')
-		.get(manager.certification);
+		.get(cert.certification);
 };
 
