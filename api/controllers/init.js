@@ -10,8 +10,8 @@ exports.initdevice = function(req,res){
 	console.log(req.query.mac);
 	var response_object={};
 
-	response_object.username='test';
-    response_object.password='test';
+	response_object.username=config.mqtt_user;
+    response_object.password=config.mqtt_password;
     //todo:Token creation function
 	response_object.token=auth.createToken(req.query.mac);
 	response_object.mac=req.query.mac;
@@ -21,8 +21,13 @@ exports.initdevice = function(req,res){
 	response_object.monitor=15;
 	response_object.scan=1;
 	response_object.survey=0;
-	response_object.tls="false";
+	response_object.tls="true";
 	response_object["no-cache"]=1;
+	response_object.cacrt="/root/certs/ca.crt";
+	response_object.topic=config.mqtt_topic;
+	response_object.key=config.mqtt_key;
+	response_object.mqtt_host=config.mqtt_host;
+	response_object.port=config.mqtt_port;
 	
 	var response_string=JSON.stringify(response_object);
 	res.json(response_object);		
