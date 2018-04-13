@@ -22,5 +22,8 @@ module.exports = function(app) {
 
 	app.route('/cert')
 		.get(cert.certification);
+
+	app.route('/md5')
+		.get(cert.md5);
 };
 
