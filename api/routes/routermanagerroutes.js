@@ -1,9 +1,9 @@
 'use strict';
 
-const collector = require("../controller/collector.js");
-const distributor = require("../controllers/distribute.js");
-const init = require("../controllers/init.js");
-const cert = require("../controllers/cert.js");
+const collector = require("../api/controller/collector.js");
+const distributor = require("../api/controllers/distribute.js");
+const init = require("../api/controllers/init.js");
+const cert = require("../api/controllers/cert.js");
 
 
 module.exports = function(app) {
