@@ -10,6 +10,9 @@ module.exports = function(app) {
 	app.route('/collector')
 		.post(collector.authentication);
 
+	app.route('/collector')
+		.post(collector.collectdata);
+
 	app.route('/distributor')
 		.get(distributor.distributedata);
 
