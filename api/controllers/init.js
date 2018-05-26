@@ -12,7 +12,6 @@ exports.initdevice = function(req,res){
 
 	response_object.username=config.mqtt_user;
     response_object.password=config.mqtt_password;
-    //todo:Token creation function
 	response_object.token=auth.createToken(req.query.mac);
 	response_object.mac=req.query.mac;
 	response_object.api_url=apiCollectorUrl;
@@ -28,8 +27,7 @@ exports.initdevice = function(req,res){
 	response_object.key=config.mqtt_key;
 	response_object.mqtt_host=config.mqtt_host;
 	response_object.port=config.mqtt_port;
-	
-	var response_string=JSON.stringify(response_object);
-	res.json(response_object);		
+	var response_string=JSON.stringify(response_object,null,' ');
+	res.end(response_string);	
     
 }

@@ -4,14 +4,16 @@ const collector = require("../controllers/collector.js");
 const distributor = require("../controllers/distribute.js");
 const init = require("../controllers/init.js");
 const cert = require("../models/cert.js");
+const mqtt = require("../models/mqtt");
+const auth = require("../models/auth");
 
 
 module.exports = function(app) {
 	app.route('/collector')
-		.post(collector.authentication);
+		.all(auth.authentication);
 
 	app.route('/collector')
-		.post(collector.collectdata);
+		.all(collector.collectdata);
 
 	app.route('/distributor')
 		.get(distributor.distributedata);
@@ -28,5 +30,8 @@ module.exports = function(app) {
 
 	app.route('/md5')
 		.get(cert.md5);
+
+	app.route('/control')
+		.post(mqtt.sendCommand);
 };
 
