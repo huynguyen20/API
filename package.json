@@ -12,12 +12,14 @@
     "nodemon": "^1.17.4"
   },
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "jsonwebtoken": "^7.3.0",
     "mongodb": "^2.2.33",
-    "mongoose": "^4.13.5",
+    "mongoose": "^4.13.14",
     "mqtt": "^2.18.0",
+    "multiparty": "^4.1.4",
     "zlib": "^1.0.5"
   }
 }

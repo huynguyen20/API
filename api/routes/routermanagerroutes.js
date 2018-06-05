@@ -10,10 +10,10 @@ const auth = require("../models/auth");
 
 module.exports = function(app) {
 	app.route('/collector')
-		.all(auth.authentication);
+		.post(auth.authentication);
 
 	app.route('/collector')
-		.all(collector.collectdata);
+		.post(collector.collectdata);
 
 	app.route('/distributor')
 		.get(distributor.distributedata);

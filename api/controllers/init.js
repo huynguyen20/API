@@ -21,12 +21,13 @@ exports.initdevice = function(req,res){
 	response_object.scan=1;
 	response_object.survey=0;
 	response_object.tls="true";
-	response_object["no-cache"]=1;
 	response_object.cacrt="/root/ca.crt";
-	response_object.topic=config.mqtt_topic;
+	response_object.topic=config.mqtt_topic_test+req.query.mac;
 	response_object.key=config.mqtt_key;
 	response_object.mqtt_host=config.mqtt_host;
 	response_object.port=config.mqtt_port;
+	response_object.cache="/tmp/cache.skm";
+	response_object.debug="true";
 	var response_string=JSON.stringify(response_object,null,' ');
 	res.end(response_string);	
     
