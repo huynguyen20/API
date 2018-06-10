@@ -9,7 +9,6 @@ exports.createToken = function(mac){
 }
 
 exports.authentication = function(req,res,next){
-	console.log(req);	
 	var token=req.query.access_token;
 	jtoken.verify(token,config.secret,function(err,decoded){
 		if (err){

@@ -28,6 +28,9 @@ exports.initdevice = function(req,res){
 	response_object.port=config.mqtt_port;
 	response_object.cache="/tmp/cache.skm";
 	response_object.debug="true";
+	response_object.rest=1;
+	response_object["no-cache"]=1;
+	response_object.splash=1;
 	var response_string=JSON.stringify(response_object,null,' ');
 	res.end(response_string);	
     

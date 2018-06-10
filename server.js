@@ -6,17 +6,17 @@ var util = require("util");
 app.use(bodyParser.json());
 
 app.listen(8888);
- app.get('/',function(req,res){
-   /*  var form = new multipart.Form();
+/*  app.use('/',function(req,res){
+    var form = new multipart.Form();
     form.parse(req, function(err, fields, files){
         console.log(util.inspect({fields: fields, files:files}));
         Object.keys(files).forEach(function(name){
             console.log(name);
         })
-    }) */
-    res.status(200);
-    res.end("This is an API");
-})
+    })
+    console.log(Date.now()/1000);
+    next();
+}) */
 var routes = require('./api/routes/routermanagerroutes');
 routes(app);
 

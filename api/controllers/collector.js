@@ -11,23 +11,27 @@ var router = require('express').Router();
 
 exports.collectdata = function (req,res){
 	console.log("device try to update");
-	var form = multiparty.Form();
+	var form = new multiparty.Form();
 
-	form.parse(req, function(err, fields, files){
-		zlib.Unzip(files.data,function(err,data_unzipped){
+/* 	form.parse(req.body, function(err, fields, files){
+		form.on(files,function(name,filename,path,headers,size){
+			console.log(name,filename);
+		})
+		zlib.Unzip(files.data,function(err,req.body){
 			if (err) throw err;
-			else{
+			else{ */
+				console.log(req.body);
 				MongoClient.connect(config.mongo_URL, function (err, db){
 					if(err) throw err;
-					if (data_unzipped.device.mac && data_unzipped.device.machine_type)	{
-						let devmac = data_unzipped.device.mac;
+					if (req.body.device.mac && req.body.device.machine_type)	{
+						let devmac = req.body.device.mac;
 						console.log(devmac);
 						db.collection("routers").findOne({"device.mac":devmac},function(err,result){
 							if(err) {
 								res.status(400);
 								res.end("Error");
 								throw err;		
-								zlib.close();		
+							//	zlib.close();		
 							}
 							if(result) {
 								db.collection("routers").updateOne({"device.mac":devmac},req.body, function(err,res){
@@ -50,10 +54,10 @@ exports.collectdata = function (req,res){
 				});
 				res.end();
 	
-			}
-	
-		})
-	})
+/* 			}
+			})
+	}) */
+
 
 
 	

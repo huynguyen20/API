@@ -18,8 +18,8 @@ module.exports = function(app) {
 	app.route('/distributor')
 		.get(distributor.distributedata);
 
-	app.route('/distributor:id')
-		.get(distributor.getdeviceinfobyid);
+	app.route('/distributor:mac')
+		.get(distributor.getdeviceinfobymac);
 
 	
 	app.route('/init')
