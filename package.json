@@ -19,6 +19,6 @@
     "mongodb": "^2.2.33",
     "mongoose": "^4.13.14",
     "mqtt": "^2.18.0",
-    "multiparty": "^4.1.4",
+    "multiparty": "^4.1.4"
   }
 }
