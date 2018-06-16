@@ -5,8 +5,8 @@ module.exports = {
     mqtt_user : 'root',
     mqtt_password : 'root',
     mongo_URL : "mongodb://localhost:27017/test",
-    mqtt_topic_test : "xiaomi/test/",
-    mqtt_topic_result:"xiaomi/result/",
+    mqtt_topic_test : "xiaomi",
+    mqtt_topic_result:"xiaomi",
     mqtt_key : "xiaomi",
     mqtt_port : 8883,
 

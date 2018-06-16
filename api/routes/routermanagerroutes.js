@@ -25,10 +25,10 @@ module.exports = function(app) {
 	app.route('/init')
 		.get(init.initdevice);
 
-	app.route('/cert')
+	app.route('/init/cert')
 		.get(cert.certification);
 
-	app.route('/md5')
+	app.route('/init/md5')
 		.get(cert.md5);
 
 	app.route('/control')
