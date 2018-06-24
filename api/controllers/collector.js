@@ -1,7 +1,6 @@
 'use strict';
 
 const config = require('../../config.js');
-const zlib = require('zlib');
 const mongo = require('mongodb');
 const multiparty = require ('multiparty');
 
