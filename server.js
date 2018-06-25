@@ -6,7 +6,7 @@ var util = require("util");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.listen(8888);
+app.listen(8080);
 
 app.post('/test',function(req,res){
     console.log(req.body);
