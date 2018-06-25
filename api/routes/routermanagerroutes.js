@@ -9,6 +9,8 @@ const auth = require("../models/auth");
 
 
 module.exports = function(app) {
+
+
 	app.route('/collector')
 		.post(auth.authentication);
 
@@ -31,7 +33,10 @@ module.exports = function(app) {
 	app.route('/init/md5')
 		.get(cert.md5);
 
-	app.route('/control')
-		.post(mqtt.sendCommand);
+	app.route('/control/single')
+		.post(mqtt.sendSingleCommand);
+
+	app.route('/control/multiple')
+		.post(mqtt.sendMultipleDevice);
 };
 
