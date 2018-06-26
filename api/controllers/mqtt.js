@@ -23,37 +23,36 @@ var broker = {
 var client = mqtt.connect(broker);
 
 var publishCommand=function(cmd,top,type){
+    if (cmd=="") return false;
     var msg_object={};
     var meta_object={};
     var command_meta='';
     msg_object.id=jobid;
     msg_object.timestamp=Date.now();
     meta_object.msg=cmd;
-    meta_object.type=type;
+    if(type){
+        meta_object.type=type;
+    }
     msg_object.meta=meta_object;
     var msg = JSON.stringify(msg_object,null,' ');
-    client.publish(topic, msg);
+    client.publish(top, msg);
     jobid++;
     console.log('PUBLISH to Topic '+top+':\n' + msg);
 
 }
 exports.sendSingleCommand = function(req,res){
-    var mac=req.headers.referer.split('?')[1],type='test';
-    var topic='listen/topic/topic'+mac;
+    var mac=req.headers.referer.split('?')[1],type='msg';
+    var topic='listen/topic/topic/'+mac;
     console.log(req.body);
     var cmd='';
     var infno=req.body.interface.split('wlan')[1];
     console.log(infno);
     if(req.body.ssid){
-        cmd="uci set wireless.@wifi-iface["+infno+"].ssid="+req.body.ssid;
-        publishCommand(cmd,topic,type);
-        cmd="uci commit";
+        cmd="uci set wireless.@wifi-iface["+infno+"].ssid="+req.body.ssid+"' && uci commit wireless && /etc/init.d/network reload";
         publishCommand(cmd,topic,type);
     }
     if(req.body.passwd){
-        cmd="uci set wireless.@wifi-iface["+infno+"].key="+req.body.passwd;
-        publishCommand(cmd,topic,type);
-        cmd="uci commit";
+        cmd="uci set wireless.@wifi-iface["+infno+"].key='"+req.body.passwd+"' && uci commit wireless && /etc/init.d/network reload";
         publishCommand(cmd,topic,type);
     }
     if(req.body.channel){
@@ -77,20 +76,33 @@ exports.sendSingleCommand = function(req,res){
         console.log(err.toString());
     }); 
  
-    res.redirect("https://google.com");
+    res.redirect("http://localhost/list.html");
     res.status(200);
     res.end();
 }
 
 exports.sendMultipleDevice = function(req,res){
-    var macArray=req.body.mac,topic,type='test',cmd;
+    var macArray=req.body.mac,topic,type='msg',cmd='';
     var cmdArray=req.body.command.split('\r\n');
-    for (var i=0;i<macArray.length;i++){
-        topic='listen/topic/topic'+macArray[i];
+    if (typeof macArray!="string"){
+        for (var i=0;i<macArray.length;i++){
+            topic='listen/topic/topic/'+macArray[i];
+            for (var j=0;j<cmdArray.length;j++){
+                cmd=cmd+cmdArray[i];
+                if (j<cmdArray.length-1){
+                    cmd=cmd+' && ';
+                }
+            }
+            publishCommand(cmd,topic,type);
+        }
+    }
+    else{
+        topic='listen/topic/topic/'+macArray;
         for (var j=0;j<cmdArray.length;j++){
             cmd=cmdArray[i];
             publishCommand(cmd,topic,type);
         }
     }
+    res.redirect("http://localhost/list.html");
     res.end("OK");
 }
