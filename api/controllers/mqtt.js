@@ -12,7 +12,7 @@ var timeStampInMs = Date.now();
 var cafile = fs.readFileSync('./certs/ca.crt');
 var broker = {
     host: config.mqtt_host,
-    port: 8883,
+    port: config.mqtt.port,
     username: 'root',
     password: 'root',
     protocol: 'mqtts',
@@ -32,7 +32,7 @@ var publishCommand=function(cmd,top,type){
     meta_object.type=type;
     msg_object.meta=meta_object;
     var msg = JSON.stringify(msg_object,null,' ');
-//    client.publish(topic, msg);
+    client.publish(topic, msg);
     jobid++;
     console.log('PUBLISH to Topic '+top+':\n' + msg);
 
