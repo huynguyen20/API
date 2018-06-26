@@ -39,7 +39,7 @@ var publishCommand=function(cmd,top,type){
 }
 exports.sendSingleCommand = function(req,res){
     var mac=req.headers.referer.split('?')[1],type='test';
-    var topic='test/'+mac;
+    var topic='listen/'+mac;
     console.log(req.body);
     var cmd='';
     var infno=req.body.interface.split('wlan')[1];
@@ -86,7 +86,7 @@ exports.sendMultipleDevice = function(req,res){
     var macArray=req.body.mac,topic,type='test',cmd;
     var cmdArray=req.body.command.split('\r\n');
     for (var i=0;i<macArray.length;i++){
-        topic='test/'+macArray[i];
+        topic='listen/'+macArray[i];
         for (var j=0;j<cmdArray.length;j++){
             cmd=cmdArray[i];
             publishCommand(cmd,topic,type);
