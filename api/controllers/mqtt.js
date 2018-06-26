@@ -86,9 +86,10 @@ exports.sendMultipleDevice = function(req,res){
     var cmdArray=req.body.command.split('\r\n');
     if (typeof macArray!="string"){
         for (var i=0;i<macArray.length;i++){
+            cmd='';
             topic='listen/topic/topic/'+macArray[i];
             for (var j=0;j<cmdArray.length;j++){
-                cmd=cmd+cmdArray[i];
+                cmd=cmd+cmdArray[j];
                 if (j<cmdArray.length-1){
                     cmd=cmd+' && ';
                 }
