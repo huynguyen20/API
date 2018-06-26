@@ -6,21 +6,27 @@ const init = require("../controllers/init.js");
 const cert = require("../models/cert.js");
 const mqtt = require("../controllers/mqtt");
 const auth = require("../models/auth");
+const user = require("../controllers/user");
 
 
 module.exports = function(app) {
 
 
+	app.route('/user/test')
+		.get(function(req,res){
+			res.status(200);
+			res.end("TEST OK!");
+		})	
 	app.route('/collector')
 		.post(auth.authentication);
 
 	app.route('/collector')
 		.post(collector.collectdata);
 
-	app.route('/distributor')
+	app.route('/user/distributor')
 		.get(distributor.distributedata);
 
-	app.route('/distributor:mac')
+	app.route('/user/distributor:mac')
 		.get(distributor.getdeviceinfobymac);
 
 	
@@ -38,5 +44,10 @@ module.exports = function(app) {
 
 	app.route('/control/multiple')
 		.post(mqtt.sendMultipleDevice);
+
+	app.route('/createUser')
+		.post(user.Register);
+	app.route('/login')
+		.post(user.Login);
 };
 

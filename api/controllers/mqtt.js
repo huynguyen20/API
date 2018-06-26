@@ -42,17 +42,22 @@ exports.sendSingleCommand = function(req,res){
     var topic='test/'+mac;
     console.log(req.body);
     var cmd='';
-    
+    var infno=req.body.interface.split('wlan')[1];
+    console.log(infno);
     if(req.body.ssid){
-        //Command to set SSID goes here, set cmd var
+        cmd="uci set wireless.@wifi-iface["+infno+"].ssid="+req.body.ssid;
+        publishCommand(cmd,topic,type);
+        cmd="uci commit";
         publishCommand(cmd,topic,type);
     }
     if(req.body.passwd){
-        //Command to set password goes here
+        cmd="uci set wireless.@wifi-iface["+infno+"].key="+req.body.passwd;
+        publishCommand(cmd,topic,type);
+        cmd="uci commit";
         publishCommand(cmd,topic,type);
     }
     if(req.body.channel){
-        //Command to set channel goes here
+        //Not working yet
         publishCommand(cmd,topic,type);
     }
     

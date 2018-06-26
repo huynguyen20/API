@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var os = require("os");
 var util = require("util");
+var user=require('./api/controllers/user');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -15,6 +16,8 @@ app.post('/test',function(req,res){
 
 
 })
+
+//app.use('/user/',user.requiresLogin);
 
 var routes = require('./api/routes/routermanagerroutes');
 routes(app);
