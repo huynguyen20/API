@@ -12,7 +12,7 @@ var timeStampInMs = Date.now();
 var cafile = fs.readFileSync('./certs/ca.crt');
 var broker = {
     host: config.mqtt_host,
-    port: config.mqtt.port,
+    port: config.mqtt_port,
     username: 'root',
     password: 'root',
     protocol: 'mqtts',
