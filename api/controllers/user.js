@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 var User = require('../models/user');
 var config = require('../../config');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var auth = require('../models/auth');
 var jwt = require('jsonwebtoken');
 
 exports.requiresLogin = function (req, res, next) {
-	if (req.session && req.session.userId) {
+	if (req.session && req.session.token) {
 	  return next();
 	} else {
 	  var err = new Error('You must be logged in to view this page.');
