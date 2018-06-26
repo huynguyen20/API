@@ -83,24 +83,30 @@ exports.sendSingleCommand = function(req,res){
 
 exports.sendMultipleDevice = function(req,res){
     var macArray=req.body.mac,topic,type='msg',cmd='';
-    var cmdArray=req.body.command.split('\r\n');
+    var commands=req.body.command;
+    if (commands.indexOf('\r\n')!=-1){
+        var cmdArray=req.body.command.split('\r\n');
+        for (var j=0;j<cmdArray.length;j++){
+            cmd=cmd+cmdArray[j];
+            if (j<cmdArray.length-1){
+                cmd=cmd+' && ';
+            }
+        }
+    }
+    else {
+        cmd=commands;
+    }
+    
+    
     if (typeof macArray!="string"){
         for (var i=0;i<macArray.length;i++){
-            cmd='';
-            topic='listen/topic/topic/'+macArray[i];
-            for (var j=0;j<cmdArray.length;j++){
-                cmd=cmd+cmdArray[j];
-                if (j<cmdArray.length-1){
-                    cmd=cmd+' && ';
-                }
-            }
+            topic='listen/topic/topic/'+macArray[i];          
             publishCommand(cmd,topic,type);
         }
     }
     else{
         topic='listen/topic/topic/'+macArray;
         for (var j=0;j<cmdArray.length;j++){
-            cmd=cmdArray[i];
             publishCommand(cmd,topic,type);
         }
     }
