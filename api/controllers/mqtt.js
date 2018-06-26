@@ -38,10 +38,9 @@ var publishCommand=function(cmd,top,type){
 
 }
 exports.sendSingleCommand = function(req,res){
-    var mac=req.headers.referer.split('?')[1];
+    var mac=req.headers.referer.split('?')[1],type='test';
     var topic='test/'+mac;
     console.log(req.body);
-     res.end("OK");
     var cmd='';
     
     if(req.body.ssid){
@@ -73,9 +72,9 @@ exports.sendSingleCommand = function(req,res){
         console.log(err.toString());
     }); 
  
-    
+    res.redirect("https://google.com");
     res.status(200);
-    res.end('OKE'); 
+    res.end();
 }
 
 exports.sendMultipleDevice = function(req,res){

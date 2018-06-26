@@ -4,7 +4,7 @@ const collector = require("../controllers/collector.js");
 const distributor = require("../controllers/distribute.js");
 const init = require("../controllers/init.js");
 const cert = require("../models/cert.js");
-const mqtt = require("../models/mqtt");
+const mqtt = require("../controllers/mqtt");
 const auth = require("../models/auth");
 
 
