@@ -28,7 +28,6 @@ exports.distributedata = function(req,res){
 
 exports.getdeviceinfobymac = function(req,res){
 	console.log("Get Device Info Req");
-	console.log(req.params);
 	res.header("Access-Control-Allow-Origin", "*");
 	MongoClient.connect(config.mongo_URL, function(err, db){
 		if(err) {
@@ -41,7 +40,6 @@ exports.getdeviceinfobymac = function(req,res){
 				if (err) {
 					console.log(err);
 				} else if(result) {
-					console.log(result);
 					res.json(result);
 				} else {
 					res.status(404);

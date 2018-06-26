@@ -19,7 +19,6 @@ exports.collectdata = function (req,res){
 		zlib.Unzip(files.data,function(err,req.body){
 			if (err) throw err;
 			else{ */
-				console.log(req.body);
 				MongoClient.connect(config.mongo_URL, function (err, db){
 					if(err) throw err;
 					if (req.body.device.mac && req.body.device.machine_type)	{
