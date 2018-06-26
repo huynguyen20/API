@@ -96,8 +96,6 @@ exports.sendMultipleDevice = function(req,res){
     else {
         cmd=commands;
     }
-    
-    
     if (typeof macArray!="string"){
         for (var i=0;i<macArray.length;i++){
             topic='listen/topic/topic/'+macArray[i];          
@@ -106,9 +104,7 @@ exports.sendMultipleDevice = function(req,res){
     }
     else{
         topic='listen/topic/topic/'+macArray;
-        for (var j=0;j<cmdArray.length;j++){
             publishCommand(cmd,topic,type);
-        }
     }
     res.redirect("http://localhost/list.html");
     res.end("OK");
