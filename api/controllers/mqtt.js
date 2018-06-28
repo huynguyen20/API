@@ -27,7 +27,7 @@ var publishCommand=function(cmd,top,type){
     var msg_object={};
     var meta_object={};
     var command_meta='';
-    msg_object.id=jobid;
+    msg_object.id=jobid.toString;
     msg_object.timestamp=Date.now();
     meta_object.msg=cmd;
     if(type){
@@ -48,7 +48,7 @@ exports.sendSingleCommand = function(req,res){
     var infno=req.body.interface.split('wlan')[1];
     console.log(infno);
     if(req.body.ssid){
-        cmd="uci set wireless.@wifi-iface["+infno+"].ssid="+req.body.ssid+"' && uci commit wireless && /etc/init.d/network reload";
+        cmd="uci set wireless.@wifi-iface["+infno+"].ssid='"+req.body.ssid+"' && uci commit wireless && /etc/init.d/network reload";
         publishCommand(cmd,topic,type);
     }
     if(req.body.passwd){

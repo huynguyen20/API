@@ -12,6 +12,7 @@
     "nodemon": "^1.17.5"
   },
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.2",
@@ -19,6 +20,7 @@
     "mongodb": "^2.2.33",
     "mongoose": "^4.13.14",
     "mqtt": "^2.18.0",
-    "multiparty": "^4.1.4"
+    "multiparty": "^4.1.4",
+    "mysql": "^2.15.0"
   }
 }

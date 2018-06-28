@@ -7,6 +7,7 @@ const cert = require("../models/cert.js");
 const mqtt = require("../controllers/mqtt");
 const auth = require("../models/auth");
 const user = require("../controllers/user");
+const splash = require("../controllers/splash-controller");
 
 
 module.exports = function(app) {
@@ -45,9 +46,17 @@ module.exports = function(app) {
 	app.route('/control/multiple')
 		.post(mqtt.sendMultipleDevice);
 
-	app.route('/createUser')
+	app.route('/register')
 		.post(user.Register);
 	app.route('/login')
 		.post(user.Login);
+	app.route('/splash/getuser')
+		.get(splash.getUserList);
+	app.route('/splash/getuser:user')
+		.get(splash.getUserDetails);
+	app.route('/splash/update')
+		.post(splash.editUser)
+	app.route('/splash/add')
+		.post(splash.addUser);
 };
 

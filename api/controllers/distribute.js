@@ -16,11 +16,8 @@ exports.distributedata = function(req,res){
 		} else {
 			var collection = db.collection('routers');
 			collection.find({},{"device.mac":1,"device.machine_type":1,"device.wan_ip":1,"device.created_at":1}).toArray( function( err, result){
-/* 			for (var i=0; i < result.length; i++){
-					console.log(result[i]);
-				} */
-			res.header("Access-Control-Allow-Origin", "*");
-			res.json(result);	
+				res.header("Access-Control-Allow-Origin", "*");
+				res.json(result);	
 			});
 		}
 	});

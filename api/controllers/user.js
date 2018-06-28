@@ -5,6 +5,7 @@ var bcrypt = require('bcrypt-nodejs');
 var auth = require('../models/auth');
 var jwt = require('jsonwebtoken');
 
+
 exports.requiresLogin = function (req, res, next) {
 	if (req.session && req.session.token) {
 	  return next();
@@ -19,23 +20,23 @@ exports.requiresLogin = function (req, res, next) {
   }
 
 exports.Register = function(req,res){
-  mongoose.connect(config.mongo_URL);
+  console.log(req.body);
+  mongoose.connect('mongodb://localhost/users',{useMongoClient:true});
     if (req.body.email &&
         req.body.username &&
-        req.body.password &&
-        req.body.passwordConf) {
+        req.body.password) {
         var userData = {
           email: req.body.email,
           username: req.body.username,
           password: req.body.password,
-          passwordConf: req.body.passwordConf,
+          devices: "",
         }
         //use schema.create to insert data into the db
         User.create(userData, function (err, user) {
           if (err) {
-            return next(err)
+            return err;
           } else {
-            return res.redirect('/login.html');
+            res.redirect('/login.html');
           }
         });
       }
@@ -44,7 +45,7 @@ exports.Register = function(req,res){
 exports.Login = function(req,res){
   var username=req.username;
   var password=req.password;
-  mongoose.connect(config.mongo_URL);
+  mongoose.connect('mongodb://localhost/users',{useMongoClient:true});
   User.findOne({username: req.username})
     .exec(function(err,user){
       if(err) 
