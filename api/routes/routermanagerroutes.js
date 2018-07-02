@@ -46,10 +46,10 @@ module.exports = function(app) {
 	app.route('/control/multiple')
 		.post(mqtt.sendMultipleDevice);
 
-	app.route('/register')
+/* 	app.route('/register')
 		.post(user.Register);
 	app.route('/login')
-		.post(user.Login);
+		.post(user.Login); */
 	app.route('/splash/getuser')
 		.get(splash.getUserList);
 	app.route('/splash/getuser:user')

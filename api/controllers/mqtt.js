@@ -27,7 +27,7 @@ var publishCommand=function(cmd,top,type){
     var msg_object={};
     var meta_object={};
     var command_meta='';
-    msg_object.id=jobid.toString;
+    msg_object.id=jobid+"";
     msg_object.timestamp=Date.now();
     meta_object.msg=cmd;
     if(type){
@@ -35,7 +35,7 @@ var publishCommand=function(cmd,top,type){
     }
     msg_object.meta=meta_object;
     var msg = JSON.stringify(msg_object,null,' ');
-    client.publish(top, msg);
+  //  client.publish(top, msg);
     jobid++;
     console.log('PUBLISH to Topic '+top+':\n' + msg);
 
@@ -45,21 +45,39 @@ exports.sendSingleCommand = function(req,res){
     var topic='listen/topic/topic/'+mac;
     console.log(req.body);
     var cmd='';
-    var infno=req.body.interface.split('wlan')[1];
-    console.log(infno);
-    if(req.body.ssid){
-        cmd="uci set wireless.@wifi-iface["+infno+"].ssid='"+req.body.ssid+"' && uci commit wireless && /etc/init.d/network reload";
-        publishCommand(cmd,topic,type);
+    var infno='';
+    if(req.body.type="ssid"){
+        infno=req.body.interface.split('wlan')[1];
+        console.log(infno);
+        if(req.body.ssid){
+            cmd="uci set wireless.@wifi-iface["+infno+"].ssid='"+req.body.ssid+"' && uci commit wireless && /etc/init.d/network reload";
+            publishCommand(cmd,topic,type);
+        }
+        if(req.body.passwd){
+            cmd="uci set wireless.@wifi-iface["+infno+"].key='"+req.body.passwd+"' && uci commit wireless && /etc/init.d/network reload";
+            publishCommand(cmd,topic,type);
+        }
+        if(req.body.channel){
+            //Not working yet
+            publishCommand(cmd,topic,type);
+        }
+    }   
+    if(req.body.type="dhcp"){
+        infno=req.body.interface;
+        if(req.body.start){
+            cmd="uci set dhcp."+infno+".start="+req.body.start;
+            publishCommand(cmd,topic,type);
+        }
+        if(req.body.limit){
+            cmd="uci set dhcp."+infno+".limit="+req.body.limit;
+            publishCommand(cmd,topic.type);
+        }
+        if(req.body.leasetime){
+            cmd="uci set dhcp."+infno+".leasetime="+req.body.leasetime;
+            publishCommand(cmd,topic,type);
+        }
+
     }
-    if(req.body.passwd){
-        cmd="uci set wireless.@wifi-iface["+infno+"].key='"+req.body.passwd+"' && uci commit wireless && /etc/init.d/network reload";
-        publishCommand(cmd,topic,type);
-    }
-    if(req.body.channel){
-        //Not working yet
-        publishCommand(cmd,topic,type);
-    }
-    
     
     //MQTT
 
