@@ -31,7 +31,7 @@ exports.getUserDetails = function(req,res){
 
 exports.editUser = function(req,res){
     console.log(req.body);
-   /*  var statement,user=req.body.username;
+     var statement,user=req.body.username;
     user = user.replace(/[^a-z0-9]/gi, '');
     if (req.body.password){
         statement="UPDATE radcheck SET value='"+req.body.password+"' WHERE username='"+user+"' AND atrribute='Cleartext-Password'";
@@ -39,7 +39,7 @@ exports.editUser = function(req,res){
     }
     if (req.body.expiration){
         statement="UPDATE radcheck SET value='"+req.body.expiration+"' WHERE username='"+name+"' AND atrribute='Expiration'";
-    } */
+    } 
 }
 exports.addUser = function(req,res){
     console.log(req.body);

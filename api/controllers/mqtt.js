@@ -35,48 +35,50 @@ var publishCommand=function(cmd,top,type){
     }
     msg_object.meta=meta_object;
     var msg = JSON.stringify(msg_object,null,' ');
-  //  client.publish(top, msg);
+    client.publish(top, msg);
     jobid++;
     console.log('PUBLISH to Topic '+top+':\n' + msg);
 
 }
 exports.sendSingleCommand = function(req,res){
-    var mac=req.headers.referer.split('?')[1],type='msg';
+    var mac=req.body.mac;
     var topic='listen/topic/topic/'+mac;
-    console.log(req.body);
+    var type="msg";
+    console.log(topic);
     var cmd='';
     var infno='';
-    if(req.body.type="ssid"){
-        infno=req.body.interface.split('wlan')[1];
+    if(req.body.type=="wireless"){
+        var radio=req.body.radio;
         console.log(infno);
         if(req.body.ssid){
-            cmd="uci set wireless.@wifi-iface["+infno+"].ssid='"+req.body.ssid+"' && uci commit wireless && /etc/init.d/network reload";
-            publishCommand(cmd,topic,type);
+            cmd+="uci set wireless.default_"+radio+".ssid='"+req.body.ssid+"'";
         }
         if(req.body.passwd){
-            cmd="uci set wireless.@wifi-iface["+infno+"].key='"+req.body.passwd+"' && uci commit wireless && /etc/init.d/network reload";
-            publishCommand(cmd,topic,type);
+            cmd+=" && uci set wireless.default_"+radio+".key='"+req.body.passwd+"'";
         }
         if(req.body.channel){
-            //Not working yet
-            publishCommand(cmd,topic,type);
+            cmd+=" && uci set wireless."+radio+".channel='"+req.body.channel+"'";
         }
+        if(req.body.ecryption){
+            cmd+=" && uci set wireless.default_"+radio+".encryption='"+req.body.ecryption+"'";
+        }
+        cmd+=" && uci commit wireless && /etc/init.d/network reload";
+        publishCommand(cmd,topic,type);
     }   
-    if(req.body.type="dhcp"){
-        infno=req.body.interface;
+    if(req.body.type=="dhcp"){
+        infno=req.body.network;
+        
         if(req.body.start){
             cmd="uci set dhcp."+infno+".start="+req.body.start;
-            publishCommand(cmd,topic,type);
         }
         if(req.body.limit){
-            cmd="uci set dhcp."+infno+".limit="+req.body.limit;
-            publishCommand(cmd,topic.type);
+            cmd+=" && uci set dhcp."+infno+".limit="+req.body.limit;
         }
-        if(req.body.leasetime){
-            cmd="uci set dhcp."+infno+".leasetime="+req.body.leasetime;
-            publishCommand(cmd,topic,type);
+        if(req.body.time){
+            cmd+=" && uci set dhcp."+infno+".leasetime="+req.body.time;
         }
-
+        cmd+=" && uci commit dhcp && /etc/init.d/dnsmasq reload";
+        publishCommand(cmd,topic,type);
     }
     
     //MQTT
@@ -94,7 +96,7 @@ exports.sendSingleCommand = function(req,res){
         console.log(err.toString());
     }); 
  
-    res.redirect("http://localhost/list.html");
+    res.redirect("http://10.71.1.75/index.html");
     res.status(200);
     res.end();
 }
@@ -124,6 +126,6 @@ exports.sendMultipleDevice = function(req,res){
         topic='listen/topic/topic/'+macArray;
             publishCommand(cmd,topic,type);
     }
-    res.redirect("http://localhost/list.html");
+    res.redirect("http://10.71.1.75/index.html");
     res.end("OK");
 }
