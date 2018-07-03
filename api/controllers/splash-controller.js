@@ -24,6 +24,7 @@ exports.getUserDetails = function(req,res){
         for (j in userdetails){
             obj[userdetails[j].attribute.replace(/[^a-z0-9]/gi, '')]=userdetails[j].value;
         }
+        console.log(obj);
         res.json(obj);
         res.end();
     }); 
@@ -33,23 +34,51 @@ exports.editUser = function(req,res){
     console.log(req.body);
      var statement,user=req.body.username;
     user = user.replace(/[^a-z0-9]/gi, '');
-    if (req.body.password){
-        statement="UPDATE radcheck SET value='"+req.body.password+"' WHERE username='"+user+"' AND atrribute='Cleartext-Password'";
-        splash_model.query(query)
+    if (req.body.password!=""){
+        statement="UPDATE radcheck SET value='"+req.body.password+"' WHERE username='"+user+"' AND attribute='Cleartext-Password'";
+        splash_model.query(statement);
     }
     if (req.body.expiration){
-        statement="UPDATE radcheck SET value='"+req.body.expiration+"' WHERE username='"+name+"' AND atrribute='Expiration'";
+        statement="UPDATE radcheck SET value='"+req.body.expiration+"' WHERE username='"+user+"' AND attribute='Expiration'";
+        console.log(statement);
+        splash_model.query(statement);
     } 
+    if (req.body.maxdailysession!=""){
+        statement="UPDATE radcheck SET value='"+req.body.maxdailysession+"' WHERE username='"+user+"' AND attribute='Max-Daily-Session'";
+        splash_model.query(statement);
+    } 
+    if (req.body.maxmonthlysession!=""){
+        statement="UPDATE radcheck SET value='"+req.body.maxmonthlysession+"' WHERE username='"+user+"' AND attribute='Max-Monthly-Session'";
+        splash_model.query(statement);
+    } 
+    if (req.body.logintime){
+        statement="UPDATE radcheck SET value='"+req.body.logintime+"' WHERE username='"+user+"' AND attribute='Login-Time'";
+        splash_model.query(statement);
+    } 
+    res.redirect("http://10.71.1.75/splash.html");
+    res.end();
 }
 exports.addUser = function(req,res){
     console.log(req.body);
     var statement='',user=req.body.username;
-     user = user.replace(/[^a-z0-9]/gi, '');
+    user = user.replace(/[^a-z0-9]/gi, '');
     statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Cleartext-Password','"+req.body.password+"')";
     splash_model.query(statement,null);
-    statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Max-Daily-Session','"+req.body.maxdailysession+"')";
-    splash_model.query(statement,null);
-    statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Expiration','"+req.body.expiration+"')";
+    if(req.body.maxdailysession){
+        statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Max-Daily-Session','"+req.body.maxdailysession+"')";
+        splash_model.query(statement,null);
+    }  
+    if(req.body.maxmonthlysession){
+        statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Max-Monthly-Session','"+req.body.maxmonthlysession+"')";
+        splash_model.query(statement,null);
+    }
+    var expiration="";
+    var expirationdate=new Date(req.body.expiration);
+    expiration+=splash_model.parsemonth(expirationdate.getMonth())+" "+expirationdate.getDate().toString()+" "+expirationdate.getFullYear().toString()+ " 00:00";
+    statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Expiration','"+expiration+"')";
     splash_model.query(statement,null); 
+    statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Login-Time','"+req.body.logintime+"')";
+    splash_model.query(statement,null); 
+    res.redirect("http://10.71.1.75/splash.html");
     res.end("OK!");
 }

@@ -31,3 +31,12 @@ exports.getDetails=function(username, callback){
     query(statement,callback);
 
 }
+
+exports.parsemonth = function(monthnum){   
+    var months = [
+        'January', 'February', 'March', 'April', 'May',
+        'June', 'July', 'August', 'September',
+        'October', 'November', 'December'
+        ];
+    return months[monthnum];
+}
