@@ -45,11 +45,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="routermanagerroutes.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="routermanagerroutes.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/routes/routermanagerroutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+            <state relative-caret-position="34">
+              <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -57,17 +57,8 @@
       <file leaf-file-name="cert.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/models/cert.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="20" lean-forward="true" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="script.sh" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/certs/script.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="533">
-              <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+            <state relative-caret-position="391">
+              <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -81,9 +72,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/api/controllers/mqtt.js" />
-        <option value="$PROJECT_DIR$/api/routes/routermanagerroutes.js" />
-        <option value="$PROJECT_DIR$/api/models/cert.js" />
         <option value="$PROJECT_DIR$/certs/script.sh" />
+        <option value="$PROJECT_DIR$/api/models/cert.js" />
+        <option value="$PROJECT_DIR$/api/routes/routermanagerroutes.js" />
       </list>
     </option>
   </component>
@@ -187,12 +178,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1530626852081</updated>
-      <workItem from="1530626853615" duration="2521000" />
+      <workItem from="1530626853615" duration="3126000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2521000" />
+    <option name="totallyTimeSpent" value="3126000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -245,24 +236,24 @@
     <entry file="file://$PROJECT_DIR$/api/models/splash-model.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/routes/routermanagerroutes.js">
+    <entry file="file://$PROJECT_DIR$/certs/script.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+        <state relative-caret-position="1479">
+          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/models/cert.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="20" lean-forward="true" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+        <state relative-caret-position="391">
+          <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/certs/script.sh">
+    <entry file="file://$PROJECT_DIR$/api/routes/routermanagerroutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+        <state relative-caret-position="34">
+          <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
         </state>
       </provider>
     </entry>
