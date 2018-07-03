@@ -62,22 +62,22 @@ exports.addUser = function(req,res){
     console.log(req.body);
     var statement='',user=req.body.username;
     user = user.replace(/[^a-z0-9]/gi, '');
-    statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Cleartext-Password','"+req.body.password+"')";
+    statement="INSERT INTO radcheck (username,op,attribute,value) VALUES ('"+user+"','!=','Cleartext-Password','"+req.body.password+"')";
     splash_model.query(statement,null);
     if(req.body.maxdailysession){
-        statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Max-Daily-Session','"+req.body.maxdailysession+"')";
+        statement="INSERT INTO radcheck (username,op,attribute,value) VALUES ('"+user+"','!=','Max-Daily-Session','"+req.body.maxdailysession+"')";
         splash_model.query(statement,null);
     }  
     if(req.body.maxmonthlysession){
-        statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Max-Monthly-Session','"+req.body.maxmonthlysession+"')";
+        statement="INSERT INTO radcheck (username,op,attribute,value) VALUES ('"+user+"','!=','Max-Monthly-Session','"+req.body.maxmonthlysession+"')";
         splash_model.query(statement,null);
     }
     var expiration="";
     var expirationdate=new Date(req.body.expiration);
     expiration+=splash_model.parsemonth(expirationdate.getMonth())+" "+expirationdate.getDate().toString()+" "+expirationdate.getFullYear().toString()+ " 00:00";
-    statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Expiration','"+expiration+"')";
+    statement="INSERT INTO radcheck (username,op,attribute,value) VALUES ('"+user+"','!=','Expiration','"+expiration+"')";
     splash_model.query(statement,null); 
-    statement="INSERT INTO radcheck (username,attribute,value) VALUES ('"+user+"','Login-Time','"+req.body.logintime+"')";
+    statement="INSERT INTO radcheck (username,op,attribute,value) VALUES ('"+user+"','!=','Login-Time','"+req.body.logintime+"')";
     splash_model.query(statement,null); 
     res.redirect("http://10.71.1.75/splash.html");
     res.end("OK!");
