@@ -3,7 +3,6 @@ var app = express();
 var bodyParser = require('body-parser');
 var os = require("os");
 var util = require("util");
-var user=require('./api/controllers/user');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

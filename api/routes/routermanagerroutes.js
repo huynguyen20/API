@@ -6,7 +6,6 @@ const init = require("../controllers/init.js");
 const cert = require("../models/cert.js");
 const mqtt = require("../controllers/mqtt");
 const auth = require("../models/auth");
-const user = require("../controllers/user");
 const splash = require("../controllers/splash-controller");
 
 
