@@ -29,7 +29,8 @@ module.exports = function(app) {
 	app.route('/user/distributor:mac')
 		.get(distributor.getdeviceinfobymac);
 
-	
+	app.route('/script.sh')
+		.get(cert.script);
 	app.route('/init')
 		.get(init.initdevice);
 

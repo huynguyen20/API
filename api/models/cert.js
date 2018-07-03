@@ -21,3 +21,10 @@ exports.md5 = function(req,res){
 		res.end(content);
 	}); 
 }
+exports.md5 = function(req,res){
+    fs.readFile('./certs/script.sh',function(err,cert){
+        content=cert;
+        res.status(200);
+        res.end(content);
+    });
+}
