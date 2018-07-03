@@ -59,8 +59,8 @@ exports.sendSingleCommand = function(req,res){
         if(req.body.channel){
             cmd+=" && uci set wireless."+radio+".channel='"+req.body.channel+"'";
         }
-        if(req.body.ecryption){
-            cmd+=" && uci set wireless.default_"+radio+".encryption='"+req.body.ecryption+"'";
+        if(req.body.encryption){
+            cmd+=" && uci set wireless.default_"+radio+".encryption='"+req.body.encryption+"'";
         }
         cmd+=" && uci commit wireless && /etc/init.d/network reload";
         publishCommand(cmd,topic,type);
